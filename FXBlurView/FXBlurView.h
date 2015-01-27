@@ -55,6 +55,13 @@
 
 @end
 
+@class FXBlurView;
+
+@protocol FXBlurViewDelegate <NSObject>
+
+- (BOOL)shouldUpdateBlurView:(FXBlurView* )blurView;
+
+@end
 
 @interface FXBlurView : UIView
 
@@ -69,6 +76,8 @@
 @property (nonatomic, assign) CGFloat blurRadius;
 @property (nonatomic, strong) UIColor *tintColor;
 @property (nonatomic, weak_ref) IBOutlet UIView *underlyingView;
+@property (nonatomic, weak_ref) IBOutlet id<FXBlurViewDelegate> delegate;
+
 
 - (void)updateAsynchronously:(BOOL)async completion:(void (^)())completion;
 

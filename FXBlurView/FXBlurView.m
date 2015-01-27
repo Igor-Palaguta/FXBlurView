@@ -261,7 +261,7 @@
                 }
                 else
                 {
-                    timeUntilNextUpdate = MIN(timeUntilNextUpdate, nextUpdate);
+                    timeUntilNextUpdate = MAX(timeUntilNextUpdate, nextUpdate);
                 }
             }
         }
@@ -459,6 +459,11 @@
 
 - (BOOL)shouldUpdate
 {
+    if (self.delegate && ![self.delegate shouldUpdateBlurView: self])
+    {
+       return NO;
+    }
+
     __strong CALayer *underlyingLayer = [self underlyingLayer];
     
     return
